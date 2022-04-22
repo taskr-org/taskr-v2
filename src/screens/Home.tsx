@@ -7,6 +7,7 @@ import { getCommonStyles } from "../utils/CommonStyles";
 import { Text } from "react-native";
 import { TextInput } from "react-native-paper";
 import Spacer from "../components/Spacer";
+import Button from "../components/Button";
 
 type Props = StackScreenProps<StackParamList, "Home">;
 
@@ -46,7 +47,7 @@ export default function Home(_navProps: Props) {
           onChangeText={(text) => setUsername(text)}
         />
 
-        <Spacer height={12} />
+        <Spacer height={10} />
 
         <TextInput
           value={password}
@@ -58,6 +59,10 @@ export default function Home(_navProps: Props) {
           style={{ backgroundColor: theme.bg }}
           onChangeText={(text) => setPassword(text)}
         />
+
+        <Spacer height={14} />
+
+        <Button text="Sign In" />
       </View>
     </View>
   );

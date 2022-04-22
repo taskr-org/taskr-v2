@@ -43,10 +43,7 @@ export const theme: ReactNativePaper.Theme = {
     primary: "#4F5860",
     placeholder: "#4F5860",
     accent: "#f1c40f",
-    text: "#fbfbfb",
-    disabled: "#fbfbfb",
-    backdrop: "#fbfbfb",
-    surface: "#fbfbfb",
+    text: "#CAD3DB",
   },
 };
 
