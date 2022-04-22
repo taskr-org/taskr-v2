@@ -34,8 +34,9 @@ export default function Home(_navProps: Props) {
     termscons: {
       alignSelf: "flex-end",
       fontFamily: "Inter-Medium",
-      color: "#6B7B88",
+      color: "#444E56",
       fontSize: 10,
+      textAlign: "right",
     },
   });
 
@@ -95,7 +96,7 @@ export default function Home(_navProps: Props) {
 
         <Spacer height={14} />
 
-        <Button text="Sign In" />
+        <Button text="Create an account" />
 
         <Spacer height={12} />
 
