@@ -56,10 +56,10 @@ export default function Main() {
       setCurrentTheme(prefs.colorScheme === "dark" ? darkTheme : lightTheme);
     };
 
-    Appearance.addChangeListener(listener);
+    const event = Appearance.addChangeListener(listener);
 
     return () => {
-      Appearance.removeChangeListener(listener);
+      event.remove();
     };
   }, []);
 
