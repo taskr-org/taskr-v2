@@ -63,6 +63,7 @@ export default function Login(_navProps: Props) {
           underlineColor="#4F5860"
           label="Password"
           textContentType="password"
+          secureTextEntry={true}
           style={{ backgroundColor: theme.bg }}
           onChangeText={(text) => setPassword(text)}
         />
