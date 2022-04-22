@@ -14,12 +14,13 @@ import changeNavigationBarColor from "react-native-navigation-bar-color";
 import Home from "./screens/Home";
 import { StyleSheet } from "react-native";
 
-const theme = {
+export const theme: ReactNativePaper.Theme = {
   ...DefaultTheme,
+  dark: true,
   fonts: configureFonts({
     android: {
       regular: {
-        fontFamily: "Inter-Regular",
+        fontFamily: "Inter-Semibold",
         fontWeight: "normal",
       },
       medium: {
@@ -27,11 +28,11 @@ const theme = {
         fontWeight: "normal",
       },
       light: {
-        fontFamily: "Inter-Light",
+        fontFamily: "Inter-Semibold",
         fontWeight: "normal",
       },
       thin: {
-        fontFamily: "Inter-Thin",
+        fontFamily: "Inter-Semibold",
         fontWeight: "normal",
       },
     },
@@ -39,8 +40,13 @@ const theme = {
   roundness: 6,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#FFE082",
+    primary: "#4F5860",
+    placeholder: "#4F5860",
     accent: "#f1c40f",
+    text: "#fbfbfb",
+    disabled: "#fbfbfb",
+    backdrop: "#fbfbfb",
+    surface: "#fbfbfb",
   },
 };
 

@@ -1,21 +1,31 @@
-import React from 'react';
+import React from "react";
 
-import {StackScreenProps} from '@react-navigation/stack';
-import {ThemeContext} from '../utils/ThemeContext';
+import { StackScreenProps } from "@react-navigation/stack";
+import { ThemeContext } from "../utils/ThemeContext";
+import { View, StyleSheet } from "react-native";
+import { getCommonStyles } from "../utils/CommonStyles";
+import { Text } from "react-native";
+import { TextInput } from "react-native-paper";
+import Spacer from "../components/Spacer";
 
-import {View, StyleSheet} from 'react-native';
-import {getCommonStyles} from '../utils/CommonStyles';
-
-type Props = StackScreenProps<StackParamList, 'Home'>;
+type Props = StackScreenProps<StackParamList, "Home">;
 
 export default function Home(_navProps: Props) {
-  let {theme} = React.useContext(ThemeContext);
+  let { theme } = React.useContext(ThemeContext);
+
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const ls = StyleSheet.create({
-    debugContainer: {
-      height: 200,
-      width: 200,
-      backgroundColor: '#f44336',
+    header: {
+      fontFamily: "Inter-Bold",
+      fontWeight: "700",
+      fontSize: 48,
+      color: "white",
+      alignSelf: "center",
+      marginTop: 52,
+      letterSpacing: -1.6,
+      lineHeight: 58,
     },
   });
 
@@ -23,8 +33,32 @@ export default function Home(_navProps: Props) {
 
   return (
     <View style={styles.root}>
-      {/* debug square, remove this! */}
-      <View style={ls.debugContainer} />
+      <Text style={ls.header}>taskr</Text>
+      <View style={{ flexGrow: 1 }} />
+      <View style={{ marginHorizontal: 30, marginBottom: 30 }}>
+        <TextInput
+          value={username}
+          mode="outlined"
+          outlineColor="#4F5860"
+          underlineColor="#4F5860"
+          label="Username"
+          style={{ backgroundColor: theme.bg }}
+          onChangeText={(text) => setUsername(text)}
+        />
+
+        <Spacer height={12} />
+
+        <TextInput
+          value={password}
+          mode="outlined"
+          outlineColor="#4F5860"
+          underlineColor="#4F5860"
+          label="Password"
+          textContentType="password"
+          style={{ backgroundColor: theme.bg }}
+          onChangeText={(text) => setPassword(text)}
+        />
+      </View>
     </View>
   );
 }
