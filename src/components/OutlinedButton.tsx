@@ -19,7 +19,6 @@ function OutlinedButton(p: Props) {
       <View
         style={{
           borderRadius: 6,
-          backgroundColor: p.theme.bg,
           borderColor: "#ACB5BD",
           borderWidth: 1,
           justifyContent: "center",
