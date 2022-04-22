@@ -23,6 +23,8 @@ target 'taskr' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'react-native-mmkv-storage', :path => '../node_modules/react-native-mmkv-storage'
+
   target 'taskrTests' do
     inherit! :complete
     # Pods for testing

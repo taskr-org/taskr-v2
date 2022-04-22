@@ -10,14 +10,21 @@ import Spacer from "../components/Spacer";
 import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
 import apis from "../utils/Networking";
+import MMKVStorage, { useMMKVStorage } from "react-native-mmkv-storage";
 
 type Props = StackScreenProps<StackParamList, "Login">;
+const storage = new MMKVStorage.Loader().initialize();
 
 export default function Login(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
 
+  if (storage.getString("user") != undefined)
+    _navProps.navigation.navigate("Home");
+
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const [_, setsUsername] = useMMKVStorage("user", storage, undefined);
 
   const ls = StyleSheet.create({
     header: {
@@ -74,7 +81,12 @@ export default function Login(_navProps: Props) {
         <Button
           text="Sign In"
           onClick={async () => {
-            await apis.login(username, password);
+            const success = await apis.login(username, password, () => {
+              if (success) {
+                setsUsername(username);
+                _navProps.navigation.navigate("Home");
+              }
+            });
           }}
         />
 

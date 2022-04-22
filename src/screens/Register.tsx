@@ -13,7 +13,7 @@ import apis from "../utils/Networking";
 
 type Props = StackScreenProps<StackParamList, "Register">;
 
-export default function Home(_navProps: Props) {
+export default function Register(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
 
   const [fullName, setFullName] = React.useState("");

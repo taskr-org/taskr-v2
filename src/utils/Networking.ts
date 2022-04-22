@@ -14,7 +14,11 @@ type Err = { status: "failure"; message: string; devNote: string } & Record<
 >;
 
 const apis = {
-  login: async (username: string, password: string): Promise<boolean> => {
+  login: async (
+    username: string,
+    password: string,
+    onClickAlert?: () => void
+  ): Promise<boolean> => {
     const resp = await api.post<Ok, Err>("/user/login", {
       username,
       password,
@@ -23,9 +27,17 @@ const apis = {
     if (resp.data) {
       Alert.alert(
         resp.data.status,
-        `${resp.data.message} ${getFrom(resp.data.devNote)}`
+        `${resp.data.message} ${getFrom(resp.data.devNote)}`,
+        [
+          {
+            text: "Okay",
+            onPress: () => {
+              onClickAlert && onClickAlert();
+            },
+          },
+        ]
       );
-      return true;
+      return resp.data.status === "success";
     }
 
     return false;
@@ -34,7 +46,8 @@ const apis = {
     fullname: string,
     username: string,
     password: string,
-    email: string
+    email: string,
+    onClickAlert?: () => void
   ): Promise<boolean> => {
     const resp = await api.post<Ok, Err>("/user/register", {
       fullname,
@@ -46,9 +59,17 @@ const apis = {
     if (resp.data) {
       Alert.alert(
         resp.data.status,
-        `${resp.data.message} ${getFrom(resp.data.devNote)}`
+        `${resp.data.message} ${getFrom(resp.data.devNote)}`,
+        [
+          {
+            text: "Okay",
+            onPress: () => {
+              onClickAlert && onClickAlert();
+            },
+          },
+        ]
       );
-      return true;
+      return resp.data.status === "success";
     }
 
     return false;

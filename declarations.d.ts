@@ -10,6 +10,7 @@ type AppTheme = {
 type StackParamList = {
   Login: undefined;
   Register: undefined;
+  Home: undefined;
 };
 
 declare module "*.svg" {
