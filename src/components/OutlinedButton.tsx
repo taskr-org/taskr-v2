@@ -9,17 +9,17 @@ type Props = {
   onClick?: () => void;
 };
 
-function OutlinedButton(p: Props, theme: AppTheme, onClick?: () => void) {
+function OutlinedButton(p: Props) {
   return (
     <TouchableRipple
       onPress={() => {
-        onClick && onClick();
+        p.onClick && p.onClick();
       }}
     >
       <View
         style={{
           borderRadius: 6,
-          backgroundColor: theme.bg,
+          backgroundColor: p.theme.bg,
           borderColor: "#ACB5BD",
           borderWidth: 1,
           justifyContent: "center",

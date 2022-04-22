@@ -101,7 +101,7 @@ export default function Home(_navProps: Props) {
 
         <Text style={ls.termscons}>
           By creating an account,
-          <br />
+          {"\n"}
           you accept the terms and conditions
         </Text>
 

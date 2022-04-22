@@ -80,7 +80,10 @@ export default function Login(_navProps: Props) {
         <OutlinedButton
           text="Don't have an account?"
           theme={theme}
-          onClick={() => _navProps.navigation.navigate("Register")}
+          onClick={() => {
+            console.log("YE WHAT");
+            _navProps.navigation.navigate("Register");
+          }}
         />
       </View>
     </View>
