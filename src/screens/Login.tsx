@@ -9,6 +9,7 @@ import { TextInput } from "react-native-paper";
 import Spacer from "../components/Spacer";
 import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
+import apis from "../utils/Networking";
 
 type Props = StackScreenProps<StackParamList, "Login">;
 
@@ -70,7 +71,12 @@ export default function Login(_navProps: Props) {
 
         <Spacer height={14} />
 
-        <Button text="Sign In" />
+        <Button
+          text="Sign In"
+          onClick={async () => {
+            await apis.login(username, password);
+          }}
+        />
 
         <Spacer height={12} />
 
@@ -81,10 +87,7 @@ export default function Login(_navProps: Props) {
         <OutlinedButton
           text="Don't have an account?"
           theme={theme}
-          onClick={() => {
-            console.log("YE WHAT");
-            _navProps.navigation.navigate("Register");
-          }}
+          onClick={() => _navProps.navigation.navigate("Register")}
         />
       </View>
     </View>

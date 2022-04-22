@@ -9,6 +9,7 @@ import { TextInput } from "react-native-paper";
 import Spacer from "../components/Spacer";
 import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
+import apis from "../utils/Networking";
 
 type Props = StackScreenProps<StackParamList, "Register">;
 
@@ -97,7 +98,12 @@ export default function Home(_navProps: Props) {
 
         <Spacer height={14} />
 
-        <Button text="Create an account" />
+        <Button
+          text="Create an account"
+          onClick={async () => {
+            await apis.register(fullName, username, password, email);
+          }}
+        />
 
         <Spacer height={12} />
 
