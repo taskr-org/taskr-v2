@@ -20,19 +20,19 @@ export const theme: ReactNativePaper.Theme = {
   fonts: configureFonts({
     android: {
       regular: {
-        fontFamily: "Inter-Semibold",
+        fontFamily: "Inter-Medium",
         fontWeight: "normal",
       },
       medium: {
-        fontFamily: "Inter-SemiBold",
+        fontFamily: "Inter-Medium",
         fontWeight: "normal",
       },
       light: {
-        fontFamily: "Inter-Semibold",
+        fontFamily: "Inter-Regular",
         fontWeight: "normal",
       },
       thin: {
-        fontFamily: "Inter-Semibold",
+        fontFamily: "Inter-Thin",
         fontWeight: "normal",
       },
     },
