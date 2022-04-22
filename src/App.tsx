@@ -11,7 +11,8 @@ import { ThemeProvider, darkTheme, lightTheme } from "./utils/ThemeContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
-import Home from "./screens/Home";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
 import { StyleSheet } from "react-native";
 
 export const theme: ReactNativePaper.Theme = {
@@ -112,7 +113,8 @@ const Stack = createStackNavigator<StackParamList>();
 function App() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 }

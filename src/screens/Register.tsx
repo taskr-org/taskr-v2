@@ -10,11 +10,13 @@ import Spacer from "../components/Spacer";
 import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
 
-type Props = StackScreenProps<StackParamList, "Home">;
+type Props = StackScreenProps<StackParamList, "Register">;
 
 export default function Home(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
 
+  const [fullName, setFullName] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -29,11 +31,11 @@ export default function Home(_navProps: Props) {
       letterSpacing: -1.6,
       lineHeight: 58,
     },
-    forpass: {
+    termscons: {
       alignSelf: "flex-end",
       fontFamily: "Inter-Medium",
       color: "#6B7B88",
-      fontSize: 16,
+      fontSize: 10,
     },
   });
 
@@ -44,6 +46,30 @@ export default function Home(_navProps: Props) {
       <Text style={ls.header}>taskr</Text>
       <View style={{ flexGrow: 1 }} />
       <View style={{ marginHorizontal: 30, marginBottom: 30 }}>
+        <TextInput
+          value={fullName}
+          mode="outlined"
+          outlineColor="#4F5860"
+          underlineColor="#4F5860"
+          label="Full Name"
+          style={{ backgroundColor: theme.bg }}
+          onChangeText={(text) => setFullName(text)}
+        />
+
+        <Spacer height={10} />
+
+        <TextInput
+          value={email}
+          mode="outlined"
+          outlineColor="#4F5860"
+          underlineColor="#4F5860"
+          label="Email Address"
+          style={{ backgroundColor: theme.bg }}
+          onChangeText={(text) => setEmail(text)}
+        />
+
+        <Spacer height={10} />
+
         <TextInput
           value={username}
           mode="outlined"
@@ -73,11 +99,19 @@ export default function Home(_navProps: Props) {
 
         <Spacer height={12} />
 
-        <Text style={ls.forpass}>Forgot password?</Text>
+        <Text style={ls.termscons}>
+          By creating an account,
+          <br />
+          you accept the terms and conditions
+        </Text>
 
         <Spacer height={36} />
 
-        <OutlinedButton text="Don't have an account?" theme={theme} />
+        <OutlinedButton
+          text="Already have an account?"
+          theme={theme}
+          onClick={() => _navProps.navigation.pop()}
+        />
       </View>
     </View>
   );

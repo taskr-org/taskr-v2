@@ -8,7 +8,8 @@ type AppTheme = {
 };
 
 type StackParamList = {
-  Home: undefined;
+  Login: undefined;
+  Register: undefined;
 };
 
 declare module "*.svg" {
