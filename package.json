@@ -18,6 +18,7 @@
     "@types/react-native": "^0.67.5",
     "@types/react-test-renderer": "^18.0.0",
     "expo-status-bar": "^1.2.0",
+    "frisbee": "^3.1.4",
     "react": "17.0.2",
     "react-native": "0.68.1",
     "react-native-gesture-handler": "^2.4.1",
