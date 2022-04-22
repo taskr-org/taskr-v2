@@ -8,6 +8,7 @@ import { Text } from "react-native";
 import { TextInput } from "react-native-paper";
 import Spacer from "../components/Spacer";
 import Button from "../components/Button";
+import OutlinedButton from "../components/OutlinedButton";
 
 type Props = StackScreenProps<StackParamList, "Home">;
 
@@ -27,6 +28,12 @@ export default function Home(_navProps: Props) {
       marginTop: 52,
       letterSpacing: -1.6,
       lineHeight: 58,
+    },
+    forpass: {
+      alignSelf: "flex-end",
+      fontFamily: "Inter-Medium",
+      color: "#6B7B88",
+      fontSize: 16,
     },
   });
 
@@ -63,6 +70,14 @@ export default function Home(_navProps: Props) {
         <Spacer height={14} />
 
         <Button text="Sign In" />
+
+        <Spacer height={12} />
+
+        <Text style={ls.forpass}>Forgot password?</Text>
+
+        <Spacer height={36} />
+
+        <OutlinedButton text="Don't have an account?" theme={theme} />
       </View>
     </View>
   );
