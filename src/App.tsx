@@ -14,6 +14,7 @@ import changeNavigationBarColor from "react-native-navigation-bar-color";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import { StyleSheet } from "react-native";
+import { forSlide } from "./utils/interpolators";
 
 export const theme: ReactNativePaper.Theme = {
   ...DefaultTheme,
@@ -112,7 +113,12 @@ const Stack = createStackNavigator<StackParamList>();
 
 function App() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: forSlide,
+      }}
+    >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
