@@ -117,6 +117,7 @@ function App() {
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: forSlide,
+        presentation: "transparentModal",
       }}
     >
       <Stack.Screen name="Login" component={Login} />
