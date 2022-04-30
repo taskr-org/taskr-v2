@@ -80,12 +80,11 @@ export default function Login(_navProps: Props) {
         <Button
           text="Sign In"
           onClick={async () => {
-            const success = await apis.login(username, password, async () => {
-              if (success) {
-                await storage.setStringAsync("username", username);
-                _navProps.navigation.navigate("Home");
-              }
-            });
+            const resp = await apis.login({ username, password });
+            if (resp.status === "success") {
+              await storage.setStringAsync("username", username);
+              _navProps.navigation.navigate("Home");
+            }
           }}
         />
 

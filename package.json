@@ -18,6 +18,7 @@
     "@types/react-native": "^0.67.5",
     "@types/react-test-renderer": "^18.0.0",
     "apisauce": "^2.1.5",
+    "drytypes": "^0.4.9",
     "expo-status-bar": "^1.2.0",
     "react": "17.0.2",
     "react-native": "0.68.1",
