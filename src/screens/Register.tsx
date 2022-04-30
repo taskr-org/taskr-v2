@@ -16,7 +16,7 @@ type Props = StackScreenProps<StackParamList, "Register">;
 export default function Register(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
 
-  const [fullName, setFullName] = React.useState("");
+  const [fullname, setFullName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -49,7 +49,7 @@ export default function Register(_navProps: Props) {
       <View style={{ flexGrow: 1 }} />
       <View style={{ marginHorizontal: 30, marginBottom: 30 }}>
         <TextInput
-          value={fullName}
+          value={fullname}
           mode="outlined"
           outlineColor="#4F5860"
           underlineColor="#4F5860"
@@ -101,7 +101,12 @@ export default function Register(_navProps: Props) {
         <Button
           text="Create an account"
           onClick={async () => {
-            await apis.register(fullName, username, password, email);
+            await apis.register({
+              fullname,
+              username,
+              password,
+              email,
+            });
           }}
         />
 

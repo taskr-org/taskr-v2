@@ -5,7 +5,7 @@ import { TouchableRipple } from "react-native-paper";
 
 type Props = {
   text: string;
-  onClick?: () => Promise<void>;
+  onClick?: () => void | Promise<void>;
 };
 
 function Button(p: Props) {
