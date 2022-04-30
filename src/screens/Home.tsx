@@ -15,7 +15,11 @@ export default function Login(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
   const styles = getCommonStyles(theme);
 
-  const [sUsername, setsUsername] = useMMKVStorage("user", storage, undefined);
+  const [sUsername, setsUsername] = useMMKVStorage(
+    "username",
+    storage,
+    undefined
+  );
 
   return (
     <View style={{ ...styles.root, marginHorizontal: 15 }}>

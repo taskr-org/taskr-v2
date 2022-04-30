@@ -17,7 +17,7 @@ const apis = {
   login: async (
     username: string,
     password: string,
-    onClickAlert?: () => void
+    onClickAlert?: () => void | Promise<void>
   ): Promise<boolean> => {
     const resp = await api.post<Ok, Err>("/user/login", {
       username,
