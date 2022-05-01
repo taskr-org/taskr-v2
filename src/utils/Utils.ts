@@ -9,7 +9,7 @@ import {
   Undefined,
 } from "drytypes";
 import MMKVStorage from "react-native-mmkv-storage";
-import { api } from "./Networking";
+import { create } from "apisauce";
 
 export const storage = new MMKVStorage.Loader().initialize();
 
@@ -43,6 +43,11 @@ export type AuthenticationInfo =
       username: string;
       token: string;
     };
+
+export const api = create({
+  baseURL: "https://api.taskr.live/",
+  timeout: 3000, // 3 seconds
+});
 
 type NetworkErr = { status: "network-failure"; message: string };
 type ValidationErr = { status: "validation-failure"; message: string };

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   configureFonts,
   DefaultTheme,
@@ -9,13 +9,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Appearance, View } from "react-native";
 import { ThemeProvider, darkTheme, lightTheme } from "./contexts/ThemeContext";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import Register from "./screens/Register";
 import { StyleSheet } from "react-native";
-import { forSlide } from "./utils/interpolators";
 import { AuthenticationInfo, storage } from "./utils/Utils";
 import { StorageKeys } from "./utils/Constants";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -55,18 +50,21 @@ export const theme: ReactNativePaper.Theme = {
   },
 };
 
-export default async function Main() {
+export default function Main() {
   const [currentTheme, setCurrentTheme] = useState(
     Appearance.getColorScheme() === "dark" ? darkTheme : lightTheme
   );
 
-  const ai = await storage.getMapAsync<AuthenticationInfo>(
-    StorageKeys.AUTH_INFO
-  );
+  const [authInfo, setAuthInfo] = useState<AuthenticationInfo>({
+    authenticated: false,
+  });
 
-  const [authInfo, setAuthInfo] = useState<AuthenticationInfo>(
-    ai == undefined ? { authenticated: false } : ai
-  );
+  useEffect(() => {
+    storage.getMap<AuthenticationInfo>(StorageKeys.AUTH_INFO, (e, ai) => {
+      if (e != undefined) return;
+      setAuthInfo(ai == undefined ? { authenticated: false } : ai);
+    });
+  }, []);
 
   // change app theme when the system theme changes
   useEffect(() => {
