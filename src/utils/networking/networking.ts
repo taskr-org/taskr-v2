@@ -1,12 +1,12 @@
 import { String } from "drytypes";
-import { apiCall } from "./Utils";
+import { apiCallCreator } from "./netutils";
 
 const apis = {
-  login: apiCall<{ username: string; password: string }>("/user/login")({
+  login: apiCallCreator<{ username: string; password: string }>("/user/login")({
     token: String,
   }),
 
-  register: apiCall<{
+  register: apiCallCreator<{
     fullname: string;
     username: string;
     email: string;

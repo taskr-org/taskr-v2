@@ -7,21 +7,18 @@ import {
 import { StatusBar, StatusBarStyle } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Appearance, View } from "react-native";
-import { ThemeProvider, darkTheme, lightTheme } from "./contexts/ThemeContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { darkTheme, lightTheme } from "./misc/themes";
 import { NavigationContainer } from "@react-navigation/native";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
 import { StyleSheet } from "react-native";
-import {
-  AuthenticationInfo,
-  getFromDef,
-  notAuthenticated,
-  storage,
-} from "./utils/Utils";
-import { StorageKeys } from "./utils/Constants";
+import { getFromDef, storage } from "./utils/generic-utils";
+import { StorageKeys } from "./utils/constants";
 import { AuthProvider } from "./contexts/AuthContext";
 import AuthenticatedStack from "./stacks/Authenticated";
 import UnauthenticatedStack from "./stacks/Unauthenticated";
 import { useMMKVStorage } from "react-native-mmkv-storage";
+import { AuthInfo, notAuthenticated } from "./utils/auth-utils";
 
 export const theme: ReactNativePaper.Theme = {
   ...DefaultTheme,
@@ -61,7 +58,7 @@ export default function Main() {
     Appearance.getColorScheme() === "dark" ? darkTheme : lightTheme
   );
 
-  const [authInfo, setAuthInfo] = useMMKVStorage<AuthenticationInfo>(
+  const [authInfo, setAuthInfo] = useMMKVStorage<AuthInfo>(
     StorageKeys.AUTH_INFO,
     storage,
     notAuthenticated
@@ -112,7 +109,7 @@ export default function Main() {
           <AuthProvider
             value={{
               authInfo: getFromDef(authInfo, notAuthenticated),
-              setAuthInfo: (ai: AuthenticationInfo) => {
+              setAuthInfo: (ai) => {
                 storage.setMap(StorageKeys.AUTH_INFO, ai);
                 setAuthInfo(ai);
               },

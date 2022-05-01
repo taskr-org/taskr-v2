@@ -3,11 +3,10 @@ import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Text, View } from "react-native";
-import { getCommonStyles } from "../utils/CommonStyles";
+import { getCommonStyles } from "../misc/common-styles";
 import { useMMKVStorage } from "react-native-mmkv-storage";
 import Button from "../components/Button";
 import Spacer from "../components/Spacer";
-import { storage } from "../utils/Utils";
 import { AuthContext } from "../contexts/AuthContext";
 
 type Props = StackScreenProps<AuthenticatedSPL, "Home">;

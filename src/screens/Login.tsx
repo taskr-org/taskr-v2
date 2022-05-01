@@ -3,13 +3,13 @@ import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { View, StyleSheet } from "react-native";
-import { getCommonStyles } from "../utils/CommonStyles";
+import { getCommonStyles } from "../misc/common-styles";
 import { Text } from "react-native";
 import { TextInput } from "react-native-paper";
 import Spacer from "../components/Spacer";
 import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
-import apis from "../utils/Networking";
+import apis from "../utils/networking/networking";
 import { AuthContext } from "../contexts/AuthContext";
 
 type Props = StackScreenProps<UnauthenticatedSPL, "Login">;

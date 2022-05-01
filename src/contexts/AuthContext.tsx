@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { AuthenticationInfo } from "../utils/Utils";
+import { AuthInfo } from "../utils/auth-utils";
 
 type AuthContext = {
-  authInfo: AuthenticationInfo;
-  setAuthInfo: (ai: AuthenticationInfo) => void;
+  authInfo: AuthInfo;
+  setAuthInfo: (ai: AuthInfo) => void;
 };
 
 export const AuthContext = createContext<AuthContext>({

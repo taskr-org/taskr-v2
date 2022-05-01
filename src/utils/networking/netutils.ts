@@ -1,4 +1,4 @@
-import { NETWORK_ERROR } from "apisauce";
+import { create, NETWORK_ERROR } from "apisauce";
 import {
   dtObj,
   dtObjStatic,
@@ -8,25 +8,20 @@ import {
   String,
   Undefined,
 } from "drytypes";
-import MMKVStorage from "react-native-mmkv-storage";
-import { create } from "apisauce";
 
-export const storage = new MMKVStorage.Loader().initialize();
+export const api = create({
+  baseURL: "https://api.taskr.live/",
+  timeout: 3000, // 3 seconds
+});
 
-export const getFrom = (val: string | undefined) =>
-  val == undefined ? "" : val;
-
-export const removeKey = <T extends Record<string, unknown>, K extends keyof T>(
-  key: K,
-  { [key]: _, ...rest }: T
-): Omit<T, K> => rest;
-
+/// the ok response type
 type Ok = { status: "success"; message: string };
 const okDt = Record({
   status: ExactString("success"),
   message: String,
 });
 
+/// the error response type
 type Err = { status: "failure"; message: string; devNote?: string };
 const errDt = Record({
   status: ExactString("failure"),
@@ -34,32 +29,14 @@ const errDt = Record({
   devNote: Undefined.union(String),
 });
 
-export const notAuthenticated: AuthenticationInfo = { authenticated: false };
-
-export const getFromDef = <T>(v: T | undefined | null, def: T): T => {
-  if (v == undefined) return def;
-  return v;
-};
-
-export type AuthenticationInfo =
-  | {
-      authenticated: false;
-    }
-  | {
-      authenticated: true;
-      username: string;
-      token: string;
-    };
-
-export const api = create({
-  baseURL: "https://api.taskr.live/",
-  timeout: 3000, // 3 seconds
-});
-
+/// when the server could not be reached
 type NetworkErr = { status: "network-failure"; message: string };
+
+/// when the response does not match the expected structure
 type ValidationErr = { status: "validation-failure"; message: string };
 
-export const apiCall =
+/// generic helper to create API call functions
+export const apiCallCreator =
   <T extends Record<string, unknown>>(endpoint: string) =>
   <S extends dtObj, R extends dtObj>(
     respKeys?: S,
