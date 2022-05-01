@@ -11,6 +11,7 @@ import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
 import apis from "../utils/networking/networking";
 import { AuthContext } from "../contexts/AuthContext";
+import OutlineInput from "../components/OutlineInput";
 
 type Props = StackScreenProps<UnauthenticatedSPL, "Login">;
 
@@ -47,29 +48,22 @@ export default function Login(_navProps: Props) {
       <Text style={ls.header}>taskr</Text>
       <View style={{ flexGrow: 1 }} />
       <View style={{ marginHorizontal: 30, marginBottom: 30 }}>
-        <TextInput
-          value={username}
-          mode="outlined"
-          outlineColor="#4F5860"
-          underlineColor="#4F5860"
+        <OutlineInput
           label="Username"
-          autoCapitalize="none"
-          style={{ backgroundColor: theme.bg }}
+          value={username}
           onChangeText={(text) => setUsername(text)}
+          theme={theme}
+          isPassword={false}
         />
 
         <Spacer height={10} />
 
-        <TextInput
-          value={password}
-          mode="outlined"
-          outlineColor="#4F5860"
-          underlineColor="#4F5860"
+        <OutlineInput
           label="Password"
-          textContentType="password"
-          secureTextEntry={true}
-          style={{ backgroundColor: theme.bg }}
+          value={password}
+          isPassword
           onChangeText={(text) => setPassword(text)}
+          theme={theme}
         />
 
         <Spacer height={14} />
