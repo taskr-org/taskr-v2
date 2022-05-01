@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { forSlide } from "../utils/interpolators";
-import Login from "../screens/Login";
-import Register from "../screens/Register";
+import Login from "../screens/unauthenticated/Login";
+import Register from "../screens/unauthenticated/Register";
 
 const UnauthenticatedStack = () => {
   const Stack = createStackNavigator<UnauthenticatedSPL>();

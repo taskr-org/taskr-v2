@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { forSlide } from "../utils/interpolators";
-import Home from "../screens/Home";
+import Home from "../screens/authenticated/Home";
 
 const AuthenticatedStack = () => {
   const Stack = createStackNavigator<AuthenticatedSPL>();
