@@ -21,7 +21,7 @@ export default function Login(_navProps: Props) {
   const styles = getCommonStyles(theme);
 
   return (
-    <View style={{ ...styles.root, marginHorizontal: 15 }}>
+    <View style={{ ...styles.root, paddingHorizontal: 15 }}>
       <Spacer height={30} />
       <Text
         style={{ ...styles.text, fontSize: 30, fontFamily: "Inter-Medium" }}
