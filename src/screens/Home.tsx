@@ -4,22 +4,21 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Text, View } from "react-native";
 import { getCommonStyles } from "../utils/CommonStyles";
-import MMKVStorage, { useMMKVStorage } from "react-native-mmkv-storage";
+import { useMMKVStorage } from "react-native-mmkv-storage";
 import Button from "../components/Button";
 import Spacer from "../components/Spacer";
+import { storage } from "../utils/Utils";
+import { AuthContext } from "../contexts/AuthContext";
 
 type Props = StackScreenProps<AuthenticatedSPL, "Home">;
-const storage = new MMKVStorage.Loader().initialize();
 
 export default function Login(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
-  const styles = getCommonStyles(theme);
+  const { authInfo, setAuthInfo } = React.useContext(AuthContext);
 
-  const [sUsername, setsUsername] = useMMKVStorage(
-    "username",
-    storage,
-    undefined
-  );
+  if (authInfo.authenticated == false) return <></>;
+
+  const styles = getCommonStyles(theme);
 
   return (
     <View style={{ ...styles.root, marginHorizontal: 15 }}>
@@ -27,14 +26,13 @@ export default function Login(_navProps: Props) {
       <Text
         style={{ ...styles.text, fontSize: 30, fontFamily: "Inter-Medium" }}
       >
-        Hi {sUsername as string}!
+        Hi {authInfo.username} with token {authInfo.token}!
       </Text>
       <Spacer height={30} />
       <Button
         text="Log Out"
         onClick={async () => {
-          setsUsername(undefined);
-          _navProps.navigation.pop();
+          setAuthInfo({ authenticated: false });
         }}
       />
     </View>

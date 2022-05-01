@@ -11,11 +11,17 @@ import { ThemeProvider, darkTheme, lightTheme } from "./contexts/ThemeContext";
 import { NavigationContainer } from "@react-navigation/native";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
 import { StyleSheet } from "react-native";
-import { AuthenticationInfo, storage } from "./utils/Utils";
+import {
+  AuthenticationInfo,
+  getFromDef,
+  notAuthenticated,
+  storage,
+} from "./utils/Utils";
 import { StorageKeys } from "./utils/Constants";
 import { AuthProvider } from "./contexts/AuthContext";
 import AuthenticatedStack from "./stacks/Authenticated";
 import UnauthenticatedStack from "./stacks/Unauthenticated";
+import { useMMKVStorage } from "react-native-mmkv-storage";
 
 export const theme: ReactNativePaper.Theme = {
   ...DefaultTheme,
@@ -55,16 +61,11 @@ export default function Main() {
     Appearance.getColorScheme() === "dark" ? darkTheme : lightTheme
   );
 
-  const [authInfo, setAuthInfo] = useState<AuthenticationInfo>({
-    authenticated: false,
-  });
-
-  useEffect(() => {
-    storage.getMap<AuthenticationInfo>(StorageKeys.AUTH_INFO, (e, ai) => {
-      if (e != undefined) return;
-      setAuthInfo(ai == undefined ? { authenticated: false } : ai);
-    });
-  }, []);
+  const [authInfo, setAuthInfo] = useMMKVStorage<AuthenticationInfo>(
+    StorageKeys.AUTH_INFO,
+    storage,
+    notAuthenticated
+  );
 
   // change app theme when the system theme changes
   useEffect(() => {
@@ -110,7 +111,7 @@ export default function Main() {
         >
           <AuthProvider
             value={{
-              authInfo,
+              authInfo: getFromDef(authInfo, notAuthenticated),
               setAuthInfo: (ai: AuthenticationInfo) => {
                 storage.setMap(StorageKeys.AUTH_INFO, ai);
                 setAuthInfo(ai);
@@ -119,7 +120,7 @@ export default function Main() {
           >
             <View style={ls.root}>
               <SafeAreaView style={ls.safeArea}>
-                {authInfo.authenticated ? (
+                {getFromDef(authInfo, notAuthenticated).authenticated ? (
                   <AuthenticatedStack />
                 ) : (
                   <UnauthenticatedStack />

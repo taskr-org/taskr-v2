@@ -34,6 +34,13 @@ const errDt = Record({
   devNote: Undefined.union(String),
 });
 
+export const notAuthenticated: AuthenticationInfo = { authenticated: false };
+
+export const getFromDef = <T>(v: T | undefined | null, def: T): T => {
+  if (v == undefined) return def;
+  return v;
+};
+
 export type AuthenticationInfo =
   | {
       authenticated: false;
