@@ -7,9 +7,11 @@ import {
   Record,
   String,
   Undefined,
-  UnDryType,
 } from "drytypes";
+import MMKVStorage from "react-native-mmkv-storage";
 import { api } from "./Networking";
+
+export const storage = new MMKVStorage.Loader().initialize();
 
 export const getFrom = (val: string | undefined) =>
   val == undefined ? "" : val;
@@ -31,6 +33,16 @@ const errDt = Record({
   message: String,
   devNote: Undefined.union(String),
 });
+
+export type AuthenticationInfo =
+  | {
+      authenticated: false;
+    }
+  | {
+      authenticated: true;
+      username: string;
+      token: string;
+    };
 
 type NetworkErr = { status: "network-failure"; message: string };
 type ValidationErr = { status: "validation-failure"; message: string };

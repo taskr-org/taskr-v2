@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   configureFonts,
   DefaultTheme,
@@ -7,15 +7,20 @@ import {
 import { StatusBar, StatusBarStyle } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Appearance, View } from "react-native";
-import { ThemeProvider, darkTheme, lightTheme } from "./utils/ThemeContext";
+import { ThemeProvider, darkTheme, lightTheme } from "./contexts/ThemeContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
+import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import { StyleSheet } from "react-native";
 import { forSlide } from "./utils/interpolators";
-import Home from "./screens/Home";
+import { AuthenticationInfo, storage } from "./utils/Utils";
+import { StorageKeys } from "./utils/Constants";
+import { AuthProvider } from "./contexts/AuthContext";
+import AuthenticatedStack from "./stacks/Authenticated";
+import UnauthenticatedStack from "./stacks/Unauthenticated";
 
 export const theme: ReactNativePaper.Theme = {
   ...DefaultTheme,
@@ -50,10 +55,17 @@ export const theme: ReactNativePaper.Theme = {
   },
 };
 
-export default function Main() {
-  // keep track of app theme so that it can be changed internally
-  const [currentTheme, setCurrentTheme] = useState(() =>
+export default async function Main() {
+  const [currentTheme, setCurrentTheme] = useState(
     Appearance.getColorScheme() === "dark" ? darkTheme : lightTheme
+  );
+
+  const ai = await storage.getMapAsync<AuthenticationInfo>(
+    StorageKeys.AUTH_INFO
+  );
+
+  const [authInfo, setAuthInfo] = useState<AuthenticationInfo>(
+    ai == undefined ? { authenticated: false } : ai
   );
 
   // change app theme when the system theme changes
@@ -98,32 +110,28 @@ export default function Main() {
               setCurrentTheme(currentTheme.isDark ? lightTheme : darkTheme),
           }}
         >
-          <View style={ls.root}>
-            <SafeAreaView style={ls.safeArea}>
-              <App />
-            </SafeAreaView>
-          </View>
+          <AuthProvider
+            value={{
+              authInfo,
+              setAuthInfo: (ai: AuthenticationInfo) => {
+                storage.setMap(StorageKeys.AUTH_INFO, ai);
+                setAuthInfo(ai);
+              },
+            }}
+          >
+            <View style={ls.root}>
+              <SafeAreaView style={ls.safeArea}>
+                {authInfo.authenticated ? (
+                  <AuthenticatedStack />
+                ) : (
+                  <UnauthenticatedStack />
+                )}
+              </SafeAreaView>
+            </View>
+          </AuthProvider>
         </ThemeProvider>
         <StatusBar style={currentTheme.statusBar as StatusBarStyle} />
       </NavigationContainer>
     </PaperProvider>
-  );
-}
-
-const Stack = createStackNavigator<StackParamList>();
-
-function App() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyleInterpolator: forSlide,
-        presentation: "transparentModal",
-      }}
-    >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
   );
 }

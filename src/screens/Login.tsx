@@ -1,7 +1,7 @@
 import React from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
-import { ThemeContext } from "../utils/ThemeContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import { View, StyleSheet } from "react-native";
 import { getCommonStyles } from "../utils/CommonStyles";
 import { Text } from "react-native";
@@ -10,16 +10,13 @@ import Spacer from "../components/Spacer";
 import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
 import apis from "../utils/Networking";
-import MMKVStorage from "react-native-mmkv-storage";
+import { AuthContext } from "../contexts/AuthContext";
 
-type Props = StackScreenProps<StackParamList, "Login">;
-const storage = new MMKVStorage.Loader().initialize();
+type Props = StackScreenProps<UnauthenticatedSPL, "Login">;
 
 export default function Login(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);
-
-  if (storage.getString("username") != undefined)
-    _navProps.navigation.navigate("Home");
+  let auth = React.useContext(AuthContext);
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -81,10 +78,12 @@ export default function Login(_navProps: Props) {
           text="Sign In"
           onClick={async () => {
             const resp = await apis.login({ username, password });
-            if (resp.status === "success") {
-              await storage.setStringAsync("username", username);
-              _navProps.navigation.navigate("Home");
-            }
+            if (resp.status === "success")
+              auth.setAuthInfo({
+                authenticated: true,
+                username,
+                token: resp.token,
+              });
           }}
         />
 

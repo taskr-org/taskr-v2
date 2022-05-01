@@ -1,7 +1,7 @@
 import React from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
-import { ThemeContext } from "../utils/ThemeContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import { View, StyleSheet } from "react-native";
 import { getCommonStyles } from "../utils/CommonStyles";
 import { Text } from "react-native";
@@ -11,7 +11,7 @@ import Button from "../components/Button";
 import OutlinedButton from "../components/OutlinedButton";
 import apis from "../utils/Networking";
 
-type Props = StackScreenProps<StackParamList, "Register">;
+type Props = StackScreenProps<UnauthenticatedSPL, "Register">;
 
 export default function Register(_navProps: Props) {
   let { theme } = React.useContext(ThemeContext);

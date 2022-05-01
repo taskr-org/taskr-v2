@@ -18,7 +18,12 @@ export const lightTheme: AppTheme = {
   accentColor: "#4C67D4",
 };
 
-export const ThemeContext = React.createContext({
+type ThemeContext = {
+  theme: AppTheme;
+  switchTheme: () => void;
+};
+
+export const ThemeContext = React.createContext<ThemeContext>({
   theme: darkTheme,
   switchTheme: () => {},
 });

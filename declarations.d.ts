@@ -7,10 +7,13 @@ type AppTheme = {
   accentColor: string;
 };
 
-type StackParamList = {
+type AuthenticatedSPL = {
+  Home: undefined;
+};
+
+type UnauthenticatedSPL = {
   Login: undefined;
   Register: undefined;
-  Home: undefined;
 };
 
 declare module "*.svg" {
