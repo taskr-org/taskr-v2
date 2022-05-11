@@ -10,9 +10,8 @@ export type AuthContext = {
  * can be used in authenticated stacks where the
  * value of authInfo will never be Unauthenticated
  */
-export type SureAuthContext = {
+export type SureAuthContext = AuthContext & {
   authInfo: Authenticated;
-  setAuthInfo: (ai: AuthInfo) => void;
 };
 
 export const AuthContext = createContext<AuthContext>({

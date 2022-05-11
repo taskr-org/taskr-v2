@@ -55,9 +55,7 @@ export default function Login(_navProps: Props) {
           theme={theme}
           isPassword={false}
         />
-
         <Spacer height={10} />
-
         <OutlineInput
           label="Password"
           value={password}
@@ -65,9 +63,7 @@ export default function Login(_navProps: Props) {
           onChangeText={(text) => setPassword(text)}
           theme={theme}
         />
-
         <Spacer height={14} />
-
         <Button
           text="Sign In"
           onClick={async () => {
@@ -80,13 +76,9 @@ export default function Login(_navProps: Props) {
               });
           }}
         />
-
         <Spacer height={12} />
-
         <Text style={ls.forpass}>Forgot password?</Text>
-
         <Spacer height={36} />
-
         <OutlinedButton
           text="Don't have an account?"
           theme={theme}

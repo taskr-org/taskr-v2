@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const getCommonStyles = (theme: AppTheme) => {
   return StyleSheet.create({
@@ -9,27 +9,27 @@ export const getCommonStyles = (theme: AppTheme) => {
 
     // text related styles
     textLight: {
-      fontFamily: 'Inter-Light',
+      fontFamily: "Inter-Light",
       color: `${theme.text}`,
     },
 
     text: {
-      fontFamily: 'Inter-Regular',
+      fontFamily: "Inter-Regular",
       color: `${theme.text}`,
     },
 
     textSemiBold: {
-      fontFamily: 'Inter-SemiBold',
+      fontFamily: "Inter-SemiBold",
       color: `${theme.text}`,
     },
 
     textBold: {
-      fontFamily: 'Inter-Bold',
+      fontFamily: "Inter-Bold",
       color: `${theme.text}`,
     },
 
     debugStyle: {
-      backgroundColor: '#f44336',
+      backgroundColor: "#f44336",
     },
   });
 };
