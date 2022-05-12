@@ -21,7 +21,6 @@ export default function Login(_navProps: Props) {
 
   return (
     <View style={{ ...styles.root, paddingHorizontal: 25 }}>
-      <View style={{ height: 100, backgroundColor: "red" }} />
       <Spacer height={30} />
 
       {/* Header */}

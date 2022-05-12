@@ -15,9 +15,15 @@ const ls = StyleSheet.create({
     padding: 20,
   },
   tag: {
-    padding: 8,
+    paddingHorizontal: 11,
+    paddingVertical: 2.5,
     backgroundColor: "#15CA73",
-    borderRadius: 9,
+    borderRadius: 14,
+    alignSelf: "flex-start",
+  },
+  tagText: {
+    letterSpacing: 1.05,
+    fontFamily: "Inter-Medium",
   },
 });
 
@@ -26,7 +32,7 @@ export function UpcomingCard() {
     <>
       <View style={ls.root}>
         <View style={ls.tag}>
-          <Text style={{ letterSpacing: 1.12, fontWeight: "500" }}>WORK</Text>
+          <Text style={ls.tagText}>WORK</Text>
         </View>
       </View>
     </>
