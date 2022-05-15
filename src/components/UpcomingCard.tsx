@@ -1,7 +1,9 @@
 import React from "react";
 
 import { StyleSheet, Text, View } from "react-native";
-import { TouchableRipple } from "react-native-paper";
+import Clock from "../../assets/clock.svg";
+import Calendar from "../../assets/calendar.svg";
+import Alarm from "../../assets/alarm.svg";
 import Spacer from "./Spacer";
 
 type Props = {
@@ -13,10 +15,11 @@ const ls = StyleSheet.create({
   root: {
     backgroundColor: "#31404D",
     borderRadius: 20,
-    paddingLeft: 22,
-    paddingTop: 25,
-    paddingBottom: 25,
-    paddingRight: 40,
+    width: 240,
+    paddingTop: 20,
+    paddingBottom: 15,
+    paddingLeft: 20,
+    paddingRight: 16,
     alignSelf: "flex-start",
   },
   tag: {
@@ -66,25 +69,34 @@ export function UpcomingCard() {
         <Spacer height={3} />
 
         {/* Info */}
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Clock height={12} width={12} fill="#879AAB" />
+          <Spacer width={4} />
           <Text style={ls.taskInfo}>10:00</Text>
-          <Spacer width={10} />
+
+          <Spacer width={12} />
+
+          <Calendar height={12} width={12} fill="#879AAB" />
+          <Spacer width={4} />
           <Text style={ls.taskInfo}>Tomorrow</Text>
         </View>
 
         <Spacer height={10} />
 
-        <View style={{ flexDirection: "row-reverse" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View />
           <View
             style={{
-              height: 28,
-              width: 28,
-              borderRadius: 14,
+              height: 34,
+              width: 34,
+              borderRadius: 17,
               backgroundColor: "#BDCBD8",
-              marginRight: -20,
-              marginBottom: -8,
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          />
+          >
+            <Alarm height={16} width={16} fill="#31404D" />
+          </View>
         </View>
       </View>
     </>
