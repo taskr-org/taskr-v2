@@ -5,10 +5,14 @@ import Clock from "../../assets/clock.svg";
 import Calendar from "../../assets/calendar.svg";
 import Alarm from "../../assets/alarm.svg";
 import Spacer from "./Spacer";
+import TextTicker from "react-native-text-ticker";
+import { tagColors } from "../utils/constants";
 
 type Props = {
-  text: string;
-  onClick?: () => void | Promise<void>;
+  tag: string;
+  time: string;
+  date: string;
+  task: string;
 };
 
 const ls = StyleSheet.create({
@@ -21,11 +25,11 @@ const ls = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 16,
     alignSelf: "flex-start",
+    marginEnd: 14,
   },
   tag: {
     paddingHorizontal: 12,
     paddingVertical: 2.5,
-    backgroundColor: "#15CA73",
     borderRadius: 14,
     alignSelf: "flex-start",
   },
@@ -51,20 +55,33 @@ const ls = StyleSheet.create({
   },
 });
 
-export function UpcomingCard() {
+export function UpcomingCard(p: Props) {
+  const [taskF, ...taskR] = p.task.split(" ");
+
   return (
     <>
       <View style={ls.root}>
-        <View style={ls.tag}>
-          <Text style={ls.tagText}>WORK</Text>
+        <View
+          style={{
+            ...ls.tag,
+            backgroundColor:
+              p.tag == "work" || p.tag == "personal"
+                ? tagColors[p.tag]
+                : tagColors.work,
+          }}
+        >
+          <Text style={ls.tagText}>{p.tag.toUpperCase()}</Text>
         </View>
 
         <Spacer height={8} />
 
         {/* Title */}
-        <Text style={ls.taskR}>
-          <Text style={ls.taskF}>Meet</Text> Jones Barry
-        </Text>
+        <TextTicker style={ls.taskR} numberOfLines={1} scrollSpeed={30}>
+          <Text numberOfLines={1} style={ls.taskF}>
+            {taskF}
+          </Text>{" "}
+          {taskR.join(" ")}
+        </TextTicker>
 
         <Spacer height={3} />
 
@@ -72,13 +89,13 @@ export function UpcomingCard() {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Clock height={12} width={12} fill="#879AAB" />
           <Spacer width={4} />
-          <Text style={ls.taskInfo}>10:00</Text>
+          <Text style={ls.taskInfo}>{p.time}</Text>
 
           <Spacer width={12} />
 
           <Calendar height={12} width={12} fill="#879AAB" />
           <Spacer width={4} />
-          <Text style={ls.taskInfo}>Tomorrow</Text>
+          <Text style={ls.taskInfo}>{p.date}</Text>
         </View>
 
         <Spacer height={10} />
