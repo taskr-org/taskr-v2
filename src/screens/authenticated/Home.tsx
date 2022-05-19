@@ -2,7 +2,7 @@ import React from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { getCommonStyles } from "../../misc/common-styles";
 import Button from "../../components/Button";
 import Spacer from "../../components/Spacer";
@@ -11,6 +11,7 @@ import { sure } from "../../utils/auth-utils";
 import { UpcomingCard } from "../../components/UpcomingCard";
 import { capitaliseStart } from "../../utils/generic-utils";
 import { ScrollView } from "react-native-gesture-handler";
+import LaterCard from "../../components/LaterCard";
 
 type Props = StackScreenProps<AuthenticatedSPL, "Home">;
 
@@ -19,6 +20,14 @@ export default function Login(_navProps: Props) {
   const { authInfo, setAuthInfo } = React.useContext(sure(AuthContext));
 
   const styles = getCommonStyles(theme);
+
+  const ls = StyleSheet.create({
+    sectionHeader: {
+      fontFamily: "Fira-Code",
+      letterSpacing: 1.6,
+      paddingHorizontal: 26,
+    },
+  });
 
   return (
     <View style={{ ...styles.root }}>
@@ -43,17 +52,9 @@ export default function Login(_navProps: Props) {
 
       <Spacer height={30} />
 
-      {/* Task list */}
+      {/* Upcoming task list */}
       <View>
-        <Text
-          style={{
-            fontFamily: "Fira-Code",
-            letterSpacing: 1.6,
-            paddingHorizontal: 26,
-          }}
-        >
-          UPCOMING TASKS
-        </Text>
+        <Text style={ls.sectionHeader}>UPCOMING TASKS</Text>
 
         <Spacer height={12} />
 
@@ -74,27 +75,40 @@ export default function Login(_navProps: Props) {
           <UpcomingCard
             tag="personal"
             time="05:00"
-            date="24/8/2023"
+            date="24/8/2022"
             task="Tell Arthur Morgan about Micah"
           />
 
           <UpcomingCard
             tag="work"
             time="02:45"
-            date="3/11/2023"
-            task="Have a meeting"
+            date="3/11/2022"
+            task="Ride to Saint Denis"
           />
         </ScrollView>
       </View>
 
       <Spacer height={30} />
 
-      <Button
-        text="Log Out"
-        onClick={async () => {
-          setAuthInfo({ authenticated: false });
-        }}
-      />
+      {/* Later this month */}
+      <View>
+        <Text style={ls.sectionHeader}>LATER THIS MONTH</Text>
+
+        <Spacer height={12} />
+
+        <LaterCard />
+      </View>
+
+      {/* temporary log out button */}
+      <View style={{ flexGrow: 1 }} />
+      <View style={{ paddingHorizontal: 30 }}>
+        <Button
+          text="Log Out"
+          onClick={async () => {
+            setAuthInfo({ authenticated: false });
+          }}
+        />
+      </View>
     </View>
   );
 }
