@@ -17,9 +17,9 @@ type Props = {
 
 const ls = StyleSheet.create({
   root: {
-    backgroundColor: "#31404D",
-    borderRadius: 20,
-    width: 240,
+    backgroundColor: "#262C2F",
+    borderRadius: 10,
+    width: 265,
     paddingTop: 20,
     paddingBottom: 15,
     paddingLeft: 20,
@@ -28,8 +28,10 @@ const ls = StyleSheet.create({
     marginEnd: 14,
   },
   tag: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
     paddingVertical: 2.5,
+    marginLeft: -0.5,
+    marginBottom: 6,
     borderRadius: 14,
     alignSelf: "flex-start",
   },
@@ -98,23 +100,46 @@ export function UpcomingCard(p: Props) {
           <Text style={ls.taskInfo}>{p.date}</Text>
         </View>
 
-        <Spacer height={10} />
+        <Spacer height={20} />
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View />
+          {/* Mark Completed */}
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#3b4143",
+              paddingHorizontal: 15,
+              borderRadius: 18,
+            }}
+          >
+            <Text
+              style={{
+                color: "#ffffff",
+                fontSize: 12.2,
+                fontFamily: "Inter-Regular",
+              }}
+            >
+              Mark Complete
+            </Text>
+          </View>
+
+          {/* Reminder */}
           <View
             style={{
               height: 34,
               width: 34,
               borderRadius: 17,
-              backgroundColor: "#BDCBD8",
+              backgroundColor: "#3b4143",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <Alarm height={16} width={16} fill="#31404D" />
+            <Alarm height={15} width={15} fill="#FFFFFF" />
           </View>
         </View>
+
+        <Spacer height={6} />
       </View>
     </>
   );
