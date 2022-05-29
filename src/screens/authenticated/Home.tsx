@@ -23,9 +23,10 @@ export default function Login(_navProps: Props) {
 
   const ls = StyleSheet.create({
     sectionHeader: {
-      fontFamily: "Fira-Code",
+      fontFamily: "Inter-Medium",
       letterSpacing: 1.6,
       paddingHorizontal: 26,
+      color: "#fbfbfb",
     },
   });
 
@@ -96,7 +97,25 @@ export default function Login(_navProps: Props) {
 
         <Spacer height={12} />
 
-        <LaterCard />
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
+          <LaterCard tag="work" task="Meet Hosea" date="Today" time="15:45" />
+
+          <LaterCard
+            tag="personal"
+            task="Pay Electricity Bill"
+            date="12/6/2022"
+            time="8:00"
+          />
+          <LaterCard
+            tag="work"
+            task="Publish Figma Component"
+            date="25/6/2022"
+            time="17:30"
+          />
+        </ScrollView>
       </View>
 
       {/* temporary log out button */}

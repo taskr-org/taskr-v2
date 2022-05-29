@@ -53,7 +53,7 @@ const ls = StyleSheet.create({
   taskInfo: {
     fontFamily: "Inter-Regular",
     fontSize: 14,
-    color: "#879AAB",
+    color: "#8e9193",
   },
 });
 
@@ -89,13 +89,13 @@ export function UpcomingCard(p: Props) {
 
         {/* Info */}
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Clock height={12} width={12} fill="#879AAB" />
+          <Clock height={12} width={12} fill="#8e9193" />
           <Spacer width={4} />
           <Text style={ls.taskInfo}>{p.time}</Text>
 
           <Spacer width={12} />
 
-          <Calendar height={12} width={12} fill="#879AAB" />
+          <Calendar height={12} width={12} fill="#8e9193" />
           <Spacer width={4} />
           <Text style={ls.taskInfo}>{p.date}</Text>
         </View>
