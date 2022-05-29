@@ -19,7 +19,7 @@ function OutlinedButton(p: Props) {
       <View
         style={{
           borderRadius: 6,
-          borderColor: "#ACB5BD",
+          borderColor: "#F2F2F2",
           borderWidth: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -28,7 +28,7 @@ function OutlinedButton(p: Props) {
         <Text
           style={{
             padding: 12,
-            color: "#ACB5BD",
+            color: "#F2F2F2",
             fontFamily: "Inter-Medium",
             fontSize: 16,
           }}

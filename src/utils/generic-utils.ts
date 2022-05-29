@@ -1,6 +1,6 @@
-import MMKVStorage from "react-native-mmkv-storage";
+import { MMKVLoader } from "react-native-mmkv-storage";
 
-export const storage = new MMKVStorage.Loader().initialize();
+export const storage = new MMKVLoader().initialize();
 
 /**
  * returns @param def if @param v is == undefined

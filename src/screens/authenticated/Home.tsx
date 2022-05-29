@@ -76,7 +76,7 @@ export default function Login(_navProps: Props) {
             tag="personal"
             time="05:00"
             date="24/8/2022"
-            task="Tell Arthur Morgan about Micah"
+            task="Tell Arthur about Micah"
           />
 
           <UpcomingCard

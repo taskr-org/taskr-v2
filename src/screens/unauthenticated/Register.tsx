@@ -40,6 +40,13 @@ export default function Register(_navProps: Props) {
       fontSize: 10,
       textAlign: "right",
     },
+    caa: {
+      fontFamily: "Inter-SemiBold",
+      fontSize: 17,
+      color: "#fbfbfb",
+      marginBottom: 5,
+      letterSpacing: -0.4,
+    },
   });
 
   const styles = getCommonStyles(theme);
@@ -47,8 +54,11 @@ export default function Register(_navProps: Props) {
   return (
     <View style={styles.root}>
       <Text style={ls.header}>taskr</Text>
+
       <View style={{ flexGrow: 1 }} />
+
       <View style={{ marginHorizontal: 30, marginBottom: 30 }}>
+        <Text style={ls.caa}>🤝 Create an account</Text>
         <OutlineInput
           label="Full Name"
           value={fullname}

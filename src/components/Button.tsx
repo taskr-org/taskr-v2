@@ -11,7 +11,7 @@ type Props = {
 function Button(p: Props) {
   return (
     <TouchableRipple
-      style={{ backgroundColor: "#D7E3ED", borderRadius: 6 }}
+      style={{ backgroundColor: "#F2F2F2", borderRadius: 6 }}
       rippleColor="#282F34"
       onPress={() => {
         p.onClick && p.onClick();
