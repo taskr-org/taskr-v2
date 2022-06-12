@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { getCommonStyles } from "../../misc/common-styles";
 import { Text } from "react-native";
 import Spacer from "../../components/Spacer";
@@ -21,6 +21,8 @@ export default function Login(_navProps: Props) {
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const [buttonText, setButtonText] = useState("Sign In");
 
   const ls = StyleSheet.create({
     header: {
@@ -85,15 +87,33 @@ export default function Login(_navProps: Props) {
         />
         <Spacer height={14} />
         <Button
-          text="Sign In"
+          text={buttonText}
           onClick={async () => {
+            setButtonText("Loading...");
             const resp = await apis.login({ username, password });
+            setButtonText("Sign In");
             if (resp.status === "success")
               auth.setAuthInfo({
                 authenticated: true,
                 username,
                 token: resp.token,
               });
+            else {
+              if (resp.status === "failure")
+                Alert.alert(
+                  "Failure",
+                  resp.message == "Incorrect body!"
+                    ? resp.devNote
+                    : resp.message
+                );
+              else if (resp.status === "network-failure")
+                Alert.alert("Network Error", "Please check your connection");
+              else if (resp.status === "validation-failure")
+                Alert.alert(
+                  "Response Validation Error",
+                  "Something went wrong on our side -- please report this to us!"
+                );
+            }
           }}
         />
         <Spacer height={12} />
