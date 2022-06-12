@@ -5,6 +5,7 @@ import { tagColors } from "../utils/constants";
 import Clock from "../../assets/clock.svg";
 import Calendar from "../../assets/calendar.svg";
 import Spacer from "./Spacer";
+import TextTicker from "react-native-text-ticker";
 
 type Props = {
   tag: string;
@@ -79,9 +80,12 @@ const LaterCard = (p: Props) => {
       {/* Content */}
       <View style={{ flex: 1, paddingVertical: 10, paddingHorizontal: 12 }}>
         {/* Title */}
-        <Text style={ls.taskR}>
-          <Text style={ls.taskF}>{taskF}</Text> {taskR.join(" ")}
-        </Text>
+        <TextTicker style={ls.taskR} numberOfLines={1} scrollSpeed={30}>
+          <Text numberOfLines={1} style={ls.taskF}>
+            {taskF}
+          </Text>{" "}
+          {taskR.join(" ")}
+        </TextTicker>
 
         <Spacer height={2} />
 
