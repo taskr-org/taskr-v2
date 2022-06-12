@@ -12,6 +12,7 @@ import { UpcomingCard } from "../../components/UpcomingCard";
 import { capitaliseStart } from "../../utils/generic-utils";
 import { ScrollView } from "react-native-gesture-handler";
 import LaterCard from "../../components/LaterCard";
+import ProfileIcon from "../../../assets/profile.svg";
 
 type Props = StackScreenProps<AuthenticatedSPL, "Home">;
 
@@ -34,21 +35,39 @@ export default function Login(_navProps: Props) {
     <View style={{ ...styles.root }}>
       <Spacer height={30} />
 
-      {/* Header */}
-      <View style={{ paddingHorizontal: 25 }}>
-        <Text style={{ ...styles.textBold, fontSize: 28 }}>
-          Hi {capitaliseStart(authInfo.username)}!
-        </Text>
-        <Text
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        {/* Header */}
+        <View style={{ paddingHorizontal: 25 }}>
+          <Text style={{ ...styles.textBold, fontSize: 28 }}>
+            Hi {capitaliseStart(authInfo.username)}!
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Inter-Medium",
+              color: "#777D81",
+              fontSize: 20,
+              fontWeight: "500",
+            }}
+          >
+            Let's organise your day
+          </Text>
+        </View>
+
+        {/* Reminder */}
+        <View
           style={{
-            fontFamily: "Inter-Medium",
-            color: "#777D81",
-            fontSize: 20,
-            fontWeight: "500",
+            height: 34,
+            width: 34,
+            borderRadius: 17,
+            backgroundColor: "#3b4143",
+            justifyContent: "center",
+            alignItems: "center",
+            marginEnd: 18,
+            alignSelf: "center",
           }}
         >
-          Let's organise your day
-        </Text>
+          <ProfileIcon height={19} width={19} fill="#FFFFFF" />
+        </View>
       </View>
 
       <Spacer height={30} />
