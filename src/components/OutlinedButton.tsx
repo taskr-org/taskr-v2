@@ -12,15 +12,18 @@ type Props = {
 function OutlinedButton(p: Props) {
   return (
     <TouchableRipple
+      borderless
+      style={{
+        borderRadius: 6,
+        borderWidth: 1,
+        borderColor: "#F2F2F2",
+      }}
       onPress={() => {
         p.onClick && p.onClick();
       }}
     >
       <View
         style={{
-          borderRadius: 6,
-          borderColor: "#F2F2F2",
-          borderWidth: 1,
           justifyContent: "center",
           alignItems: "center",
         }}
