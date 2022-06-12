@@ -117,9 +117,12 @@ export function CreateTask(_navProps: Props) {
             Save
           </Text>
         </View>
-        <View style={{ ...ls.bottomTextCommon, backgroundColor: "#313B43" }}>
+        <Pressable
+          onPress={() => _navProps.navigation.pop()}
+          style={{ ...ls.bottomTextCommon, backgroundColor: "#313B43" }}
+        >
           <Text style={{ fontSize: 17, color: "#ffffff" }}>Cancel</Text>
-        </View>
+        </Pressable>
       </View>
     </View>
   );
