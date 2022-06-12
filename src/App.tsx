@@ -5,7 +5,7 @@ import {
   Provider as PaperProvider,
 } from "react-native-paper";
 import { StatusBar, StatusBarStyle } from "expo-status-bar";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Appearance, View } from "react-native";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { darkTheme, lightTheme } from "./misc/themes";
@@ -87,9 +87,6 @@ export default function Main() {
   }, [currentTheme]);
 
   const ls = StyleSheet.create({
-    root: {
-      flex: 1,
-    },
     safeArea: {
       flex: 1,
       backgroundColor: currentTheme.bg,
@@ -98,24 +95,24 @@ export default function Main() {
 
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <ThemeProvider
-          value={{
-            theme: currentTheme,
-            switchTheme: () =>
-              setCurrentTheme(currentTheme.isDark ? lightTheme : darkTheme),
-          }}
-        >
-          <AuthProvider
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <ThemeProvider
             value={{
-              authInfo: getFromDef(authInfo, notAuthenticated),
-              setAuthInfo: (ai) => {
-                storage.setMap(StorageKeys.AUTH_INFO, ai);
-                setAuthInfo(ai);
-              },
+              theme: currentTheme,
+              switchTheme: () =>
+                setCurrentTheme(currentTheme.isDark ? lightTheme : darkTheme),
             }}
           >
-            <View style={ls.root}>
+            <AuthProvider
+              value={{
+                authInfo: getFromDef(authInfo, notAuthenticated),
+                setAuthInfo: (ai) => {
+                  storage.setMap(StorageKeys.AUTH_INFO, ai);
+                  setAuthInfo(ai);
+                },
+              }}
+            >
               <SafeAreaView style={ls.safeArea}>
                 {getFromDef(authInfo, notAuthenticated).authenticated ? (
                   <AuthenticatedStack />
@@ -123,11 +120,11 @@ export default function Main() {
                   <UnauthenticatedStack />
                 )}
               </SafeAreaView>
-            </View>
-          </AuthProvider>
-        </ThemeProvider>
-        <StatusBar style={currentTheme.statusBar as StatusBarStyle} />
-      </NavigationContainer>
+            </AuthProvider>
+          </ThemeProvider>
+          <StatusBar style={currentTheme.statusBar as StatusBarStyle} />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </PaperProvider>
   );
 }

@@ -4,7 +4,6 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { StyleSheet, Text, View } from "react-native";
 import { getCommonStyles } from "../../misc/common-styles";
-import Button from "../../components/Button";
 import Spacer from "../../components/Spacer";
 import { AuthContext } from "../../contexts/AuthContext";
 import { sure } from "../../utils/auth-utils";
@@ -55,26 +54,26 @@ export default function Login(_navProps: Props) {
         </View>
 
         {/* Reminder */}
-        <TouchableRipple
-          onPress={() => {
-            setAuthInfo({ authenticated: false });
+        <View
+          style={{
+            height: 34,
+            width: 34,
+            borderRadius: 17,
+            backgroundColor: "#3b4143",
+            justifyContent: "center",
+            alignItems: "center",
+            marginEnd: 18,
+            alignSelf: "center",
           }}
         >
-          <View
-            style={{
-              height: 34,
-              width: 34,
-              borderRadius: 17,
-              backgroundColor: "#3b4143",
-              justifyContent: "center",
-              alignItems: "center",
-              marginEnd: 18,
-              alignSelf: "center",
+          <TouchableRipple
+            onPress={() => {
+              setAuthInfo({ authenticated: false });
             }}
           >
             <ProfileIcon height={19} width={19} fill="#FFFFFF" />
-          </View>
-        </TouchableRipple>
+          </TouchableRipple>
+        </View>
       </View>
 
       <Spacer height={30} />
@@ -118,15 +117,12 @@ export default function Login(_navProps: Props) {
       <Spacer height={30} />
 
       {/* Later this month */}
-      <View>
+      <View style={{ flexShrink: 1 }}>
         <Text style={ls.sectionHeader}>LATER THIS MONTH</Text>
 
         <Spacer height={12} />
 
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-        >
+        <ScrollView showsVerticalScrollIndicator={false}>
           <LaterCard tag="work" task="Meet Hosea" date="Today" time="15:45" />
 
           <LaterCard
@@ -135,12 +131,16 @@ export default function Login(_navProps: Props) {
             date="12/6/2022"
             time="8:00"
           />
+
           <LaterCard
             tag="work"
             task="Publish Figma Component"
             date="25/6/2022"
             time="17:30"
           />
+
+          <LaterCard tag="work" task="Meet Hosea" date="Today" time="15:45" />
+          <LaterCard tag="work" task="Meet John" date="Today" time="15:45" />
         </ScrollView>
       </View>
     </View>
