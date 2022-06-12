@@ -14,6 +14,8 @@ type Props = {
   time: string;
   date: string;
   task: string;
+
+  onSkip?: () => Promise<void>;
 };
 
 const ls = StyleSheet.create({
@@ -126,7 +128,10 @@ const LaterCard = (p: Props) => {
                 flexDirection: "row",
               }}
             >
-              <View
+              <Pressable
+                onPress={() => {
+                  p.onSkip && p.onSkip();
+                }}
                 style={{
                   ...ls.optionView,
                   backgroundColor: "#FF6969",
@@ -140,7 +145,7 @@ const LaterCard = (p: Props) => {
                 >
                   Skip
                 </Text>
-              </View>
+              </Pressable>
 
               <View
                 style={{

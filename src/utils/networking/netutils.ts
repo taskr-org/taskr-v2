@@ -1,4 +1,4 @@
-import { create, NETWORK_ERROR } from "apisauce";
+import { ApiResponse, create, NETWORK_ERROR } from "apisauce";
 import {
   dtObj,
   dtObjStatic,
@@ -8,6 +8,11 @@ import {
   String,
   Undefined,
 } from "drytypes";
+import { Alert } from "react-native";
+import { JsxOpeningLikeElement } from "typescript";
+import { AuthInfo } from "../auth-utils";
+import { StorageKeys } from "../constants";
+import { storage } from "../generic-utils";
 
 export const api = create({
   baseURL: "https://api.taskr.live/",
@@ -37,7 +42,10 @@ type ValidationErr = { status: "validation-failure"; message: string };
 
 /// generic helper to create API call functions
 export const apiCallCreator =
-  <T extends Record<string, unknown>>(endpoint: string) =>
+  <T extends Record<string, unknown>>(
+    endpoint: string,
+    method: "POST" | "GET" | "DELETE" = "POST"
+  ) =>
   <S extends dtObj, R extends dtObj>(
     respKeys?: S,
     errKeys?: R
@@ -47,7 +55,24 @@ export const apiCallCreator =
     (dtObjStatic<S> & Ok) | (dtObjStatic<R> & Err) | NetworkErr | ValidationErr
   >) =>
   async (data) => {
-    const resp = await api.post<Ok, Err>(endpoint, data);
+    const info = await storage.getMapAsync<AuthInfo>(StorageKeys.AUTH_INFO);
+    if (!info || !info.authenticated)
+      Alert.alert("Non-existent login session! Please log in again.");
+    else api.setHeader("Authorization", info.token);
+
+    let resp: ApiResponse<Ok, Err> | undefined = undefined;
+
+    if (method == "POST") resp = await api.post<Ok, Err>(endpoint, data);
+    else if (method == "GET") resp = await api.get<Ok, Err>(endpoint, data);
+    else if (method == "DELETE")
+      resp = await api.delete<Ok, Err>(endpoint, data);
+
+    if (resp == undefined)
+      return {
+        status: "network-failure",
+        message: "Unable to obtain a response",
+      };
+
     const rdata = resp.data;
 
     if (resp.problem == NETWORK_ERROR)

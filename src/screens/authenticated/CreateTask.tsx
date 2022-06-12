@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
 import Spacer from "../../components/Spacer";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { getCommonStyles } from "../../misc/common-styles";
@@ -9,6 +9,8 @@ import Tag from "../../components/Tag";
 import { Text } from "react-native-paper";
 import { StackScreenProps } from "@react-navigation/stack";
 import { tagColors } from "../../utils/constants";
+import apis from "../../utils/networking/networking";
+import { getRandomDate } from "../../utils/generic-utils";
 
 type Props = StackScreenProps<AuthenticatedSPL, "CreateTask">;
 
@@ -112,11 +114,27 @@ export function CreateTask(_navProps: Props) {
       {/* Bottom menu */}
       <View style={{ flexGrow: 1 }} />
       <View style={{ flexDirection: "row", width: "100%" }}>
-        <View style={{ ...ls.bottomTextCommon, backgroundColor: "#5F7180" }}>
+        <Pressable
+          onPress={async () => {
+            const resp = await apis.tasks.create({
+              title,
+              description,
+              tags: [selectedTag],
+              notification: false,
+              location: "Somewhere",
+              link: "https://taskr.live",
+              datetime: `${getRandomDate()}`,
+            });
+
+            if (resp.status == "success") Alert.alert("Success", "Created!");
+            else Alert.alert(resp.status, resp.message);
+          }}
+          style={{ ...ls.bottomTextCommon, backgroundColor: "#5F7180" }}
+        >
           <Text style={{ fontWeight: "bold", fontSize: 17, color: "#ffffff" }}>
             Save
           </Text>
-        </View>
+        </Pressable>
         <Pressable
           onPress={() => _navProps.navigation.pop()}
           style={{ ...ls.bottomTextCommon, backgroundColor: "#313B43" }}
