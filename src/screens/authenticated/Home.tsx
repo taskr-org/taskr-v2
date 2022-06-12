@@ -2,7 +2,7 @@ import React from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, Touchable, View } from "react-native";
 import { getCommonStyles } from "../../misc/common-styles";
 import Spacer from "../../components/Spacer";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -143,6 +143,36 @@ export default function Login(_navProps: Props) {
           <LaterCard tag="work" task="Meet John" date="Today" time="15:45" />
         </ScrollView>
       </View>
+
+      {/* FAB */}
+      <TouchableRipple
+        rippleColor="#202020"
+        borderless
+        style={{
+          borderRadius: 30,
+          position: "absolute",
+          bottom: 25,
+          right: 20,
+          elevation: 10,
+          shadowColor: "#353535",
+        }}
+        onPress={() => {
+          console.log("hah");
+        }}
+      >
+        <View style={{ backgroundColor: "#F2F2F2" }}>
+          <Text
+            style={{
+              ...styles.textSemiBold,
+              paddingHorizontal: 22,
+              paddingVertical: 15,
+              color: "black",
+            }}
+          >
+            + Add New
+          </Text>
+        </View>
+      </TouchableRipple>
     </View>
   );
 }
