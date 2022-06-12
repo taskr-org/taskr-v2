@@ -4,9 +4,11 @@ import { TextInput } from "react-native-paper";
 type Props = {
   label: string;
   value: string;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   theme: AppTheme;
-  isPassword: boolean;
+  isPassword?: boolean;
+  height?: number;
+  multiline?: boolean;
 };
 
 export default function OutlineInput(p: Props) {
@@ -18,9 +20,13 @@ export default function OutlineInput(p: Props) {
       underlineColor={p.theme.accentColor}
       autoCapitalize="none"
       label={p.label}
-      secureTextEntry={p.isPassword}
-      style={{ backgroundColor: p.theme.bg }}
-      onChangeText={p.onChangeText}
+      secureTextEntry={p.isPassword ?? false}
+      multiline={p.multiline ?? false}
+      style={{
+        backgroundColor: p.theme.bg,
+        ...(p.height != undefined ? { height: p.height } : {}),
+      }}
+      onChangeText={p.onChangeText ?? (() => {})}
     />
   );
 }

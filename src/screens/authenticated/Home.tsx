@@ -2,7 +2,7 @@ import React from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { Pressable, StyleSheet, Text, Touchable, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { getCommonStyles } from "../../misc/common-styles";
 import Spacer from "../../components/Spacer";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -32,7 +32,7 @@ export default function Login(_navProps: Props) {
   });
 
   return (
-    <View style={{ ...styles.root }}>
+    <View style={styles.root}>
       <Spacer height={30} />
 
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -157,7 +157,7 @@ export default function Login(_navProps: Props) {
           shadowColor: "#353535",
         }}
         onPress={() => {
-          console.log("hah");
+          _navProps.navigation.navigate("CreateTask");
         }}
       >
         <View style={{ backgroundColor: "#F2F2F2" }}>

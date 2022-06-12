@@ -9,6 +9,7 @@ type AppTheme = {
 
 type AuthenticatedSPL = {
   Home: undefined;
+  CreateTask: undefined;
 };
 
 type UnauthenticatedSPL = {
