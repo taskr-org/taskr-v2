@@ -13,6 +13,7 @@ import { capitaliseStart } from "../../utils/generic-utils";
 import { ScrollView } from "react-native-gesture-handler";
 import LaterCard from "../../components/LaterCard";
 import ProfileIcon from "../../../assets/profile.svg";
+import { TouchableRipple } from "react-native-paper";
 
 type Props = StackScreenProps<AuthenticatedSPL, "Home">;
 
@@ -54,20 +55,26 @@ export default function Login(_navProps: Props) {
         </View>
 
         {/* Reminder */}
-        <View
-          style={{
-            height: 34,
-            width: 34,
-            borderRadius: 17,
-            backgroundColor: "#3b4143",
-            justifyContent: "center",
-            alignItems: "center",
-            marginEnd: 18,
-            alignSelf: "center",
+        <TouchableRipple
+          onPress={() => {
+            setAuthInfo({ authenticated: false });
           }}
         >
-          <ProfileIcon height={19} width={19} fill="#FFFFFF" />
-        </View>
+          <View
+            style={{
+              height: 34,
+              width: 34,
+              borderRadius: 17,
+              backgroundColor: "#3b4143",
+              justifyContent: "center",
+              alignItems: "center",
+              marginEnd: 18,
+              alignSelf: "center",
+            }}
+          >
+            <ProfileIcon height={19} width={19} fill="#FFFFFF" />
+          </View>
+        </TouchableRipple>
       </View>
 
       <Spacer height={30} />
@@ -135,17 +142,6 @@ export default function Login(_navProps: Props) {
             time="17:30"
           />
         </ScrollView>
-      </View>
-
-      {/* temporary log out button */}
-      <View style={{ flexGrow: 1 }} />
-      <View style={{ paddingHorizontal: 30 }}>
-        <Button
-          text="Log Out"
-          onClick={async () => {
-            setAuthInfo({ authenticated: false });
-          }}
-        />
       </View>
     </View>
   );
