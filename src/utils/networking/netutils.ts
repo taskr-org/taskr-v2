@@ -56,9 +56,7 @@ export const apiCallCreator =
   >) =>
   async (data) => {
     const info = await storage.getMapAsync<AuthInfo>(StorageKeys.AUTH_INFO);
-    if (!info || !info.authenticated)
-      Alert.alert("Non-existent login session! Please log in again.");
-    else api.setHeader("Authorization", info.token);
+    if (info && info.authenticated) api.setHeader("Authorization", info.token);
 
     let resp: ApiResponse<Ok, Err> | undefined = undefined;
 
