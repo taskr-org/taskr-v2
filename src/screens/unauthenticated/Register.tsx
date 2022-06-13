@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { getCommonStyles } from "../../misc/common-styles";
 import { Text } from "react-native";
 import { TextInput } from "react-native-paper";
@@ -21,6 +21,8 @@ export default function Register(_navProps: Props) {
   const [email, setEmail] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const [buttonText, setButtonText] = useState("Create an account");
 
   const ls = StyleSheet.create({
     header: {
@@ -100,14 +102,20 @@ export default function Register(_navProps: Props) {
         <Spacer height={14} />
 
         <Button
-          text="Create an account"
+          text={buttonText}
           onClick={async () => {
-            await apis.register({
+            setButtonText("Loading...");
+
+            const resp = await apis.register({
               fullname,
               username,
               password,
               email,
             });
+
+            setButtonText("Create an account");
+
+            Alert.alert(resp.status, resp.message);
           }}
         />
 
